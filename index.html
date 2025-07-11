@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title> login</title>
+  <title>Login</title>
   <style>
     * {
       box-sizing: border-box;
@@ -13,57 +13,89 @@
     body {
       margin: 0;
       padding: 0;
-      background-color: #ffffff;
+      height: 100vh;
+      background: url('firas.jpg') no-repeat center center fixed;
+      background-size: cover;
       display: flex;
       align-items: center;
       justify-content: center;
-      height: 100vh;
     }
 
     .login-container {
-      background-color: #ffffff;
-      border: 1px solid #e0e0e0;
-      border-radius: 16px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
       padding: 40px;
       width: 320px;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
       text-align: center;
+      animation: fadeIn 0.8s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .login-container h2 {
+      color: white;
+      font-size: 26px;
       margin-bottom: 25px;
-      color: #333;
     }
 
     .login-container input {
       width: 100%;
       padding: 12px;
       margin: 10px 0;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      font-size: 14px;
+      border: none;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      font-size: 15px;
+      outline: none;
+      transition: background 0.3s;
+    }
+
+    .login-container input::placeholder {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .login-container input:focus {
+      background: rgba(255, 255, 255, 0.3);
     }
 
     .login-container button {
       width: 100%;
       padding: 12px;
-      background-color: #000000;
-      color: #fff;
-      border: none;
-      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.25);
+      color: white;
       font-size: 16px;
+      font-weight: bold;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      border-radius: 12px;
       cursor: pointer;
-      transition: background-color 0.3s;
+      transition: background 0.3s, transform 0.2s;
+      margin-top: 15px;
     }
 
     .login-container button:hover {
-      background-color: #333;
+      background: rgba(255, 255, 255, 0.35);
+      transform: translateY(-2px);
+    }
+
+    .login-container button:active {
+      transform: translateY(0);
     }
 
     .error {
-      color: red;
+      margin-top: 15px;
+      color: #ffcccc;
+      background: rgba(255, 0, 0, 0.1);
+      padding: 10px;
+      border-radius: 8px;
+      display: none;
       font-size: 14px;
-      margin-top: 10px;
     }
 
     @media (max-width: 400px) {
@@ -77,19 +109,18 @@
 <body>
 
   <div class="login-container">
-    <h2> welcome 
-      login</h2>
-    <input type="text" id="username" placeholder="username ">
-    <input type="password" id="password" placeholder="password ">
+    <h2>Welcome Back</h2>
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
     <button onclick="login()">Login</button>
-    <div class="error" id="error"></div>
+    <div class="error" id="error">Incorrect username or password</div>
   </div>
 
   <script>
     function login() {
-      const correctUsername = "Rita";   
-      const correctPassword = "33314";   
-      const redirectURL = "main.html"; 
+      const correctUsername = "Rita";
+      const correctPassword = "33314";
+      const redirectURL = "index.html";
 
       const username = document.getElementById("username").value.trim();
       const password = document.getElementById("password").value.trim();
@@ -98,7 +129,8 @@
       if (username === correctUsername && password === correctPassword) {
         window.location.href = redirectURL;
       } else {
-        errorDiv.textContent ="Usernmae or password incorrect" ;
+        errorDiv.style.display = 'block';
+        errorDiv.textContent = "Incorrect username or password";
       }
     }
   </script>
